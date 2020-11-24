@@ -8,17 +8,16 @@ public class Product {
     private double productPrice;
     private ProductCategory productcategory;
     private int Stock;
-    int counter = 0;
+    static int counter = 1;
 
 
-    public Product(String productName, String productDescription, double productPrice, ProductCategory prouctcategory) {
-        counter++;
-        this.productID = counter;
+    public Product(String productName, String productDescription, double productPrice, ProductCategory prouctcategory,int Stock) {
+        this.productID = counter++;
         this.productPrice = productPrice;
         this.productName = productName;
         this.ProductDescription = productDescription;
         this.productcategory = prouctcategory;
-        this.Stock = 5;
+        this.Stock = Stock;
     }
 
     public  String getProductName() {
@@ -61,6 +60,8 @@ public class Product {
     //public static String getProductName() {
        // return productName;
     //}
+
+
 
     public String getProductDescription() {
         return ProductDescription;

@@ -35,18 +35,14 @@ public class Shop {
                 System.err.println("A product can only have max.stock 15 items");
 
             }
-            else {
-                int newStock = products.get(i).getStock()+1;
-                products.get(i).setStock(newStock);
-
-            }
 
     }}
+
 
     //Add UserHistroy
     public void UserHistory(User user){
         User.add(user);
-    System.out.println("Purchase gets added to the purchase history of user") ;
+    System.out.println("Purchase gets added to the purchase history of user ") ;
 
 }
     public ArrayList<Product> getProducts() {
@@ -78,26 +74,14 @@ public class Shop {
         this.address = address;
     }
 
-    public String getShopName() {
+    public  String getShopName() {
         return shopName;
     }
 
 
 
     //Method for removing products from shop
-    public static void purchase(Product product, Shop shop, User user) {
-        user.UserPurchase(product);
-        System.out.println("User " + user.getFirstname() + " buy product " + product.getProductName() + " from Shop " + shop.getShopName());
-        shop.removeProducts(product);
-        System.out.println("Stock gets reduced by the amount " + user.Counter);
-        System.out.println("Purchase gets added to the purchase history of user "+user.getFirstname());
-        System.out.println("Stock after Purchasing Items " + product.getStock());
-        System.out.println("Purchase History before and after the purchase " +user);
-
-    }
-
-    public void removeProducts(Product product) {
-
+        public void removeProducts(Product product) {
         products.remove(product);
 
     }
@@ -113,11 +97,12 @@ public class Shop {
     public void PrintMenu() {
         System.out.println("Make a selection");
         System.out.println("1) Display all products");
-        System.out.println("2) Display all products of category x.");
+        System.out.println("2) Display all products of category Jacket.");
         System.out.println("3) Display all products where stock <5.");
         System.out.println("4) Display all products out of stock.");
         System.out.println("0) Exit.");
     }
+
 
     public void UserInput() {
         int n = 0;
@@ -128,22 +113,38 @@ public class Shop {
                 int x = userinput.nextInt();
                 if (x >= 0 && x <= 4) {
                     switch (x) {
-                        case 1:
-
-                            System.out.println("Product " +products);//do not know why it say null in the console
+                        case 1: {
+                            System.out.println("Display All the Products");
+                            for (int i = 0; i < products.size(); i++)
+                                System.out.println(products.get(i));
+                        }
                             break;
+
                             case 2:
-                                System.out.println(products.contains("JACKET"));
-                                break;
+                                System.out.println("Products Which are belonged to category Jacket");
+                                for (int i = 0; i < products.size(); i++) {
+                                    if (products.get(i).getProductcategory() == ProductCategory.JACKET)
+                                        System.out.println( products.get(i));
 
-                        case 3: {
-                            System.out.println("selection 3");
+                                }
+
+                                 break;
+
+                        case 3:
+                            System.out.println("Display all products where stock <5");
+                            for(int i=0;i<products.size();i++) {
+                                if (products.get(i).getStock() < 5)
+                                    System.out.println(products.get(i));
+                            }
+                          break;
+
+                        case 4:
+                            System.out.println("Display all products out of stock.");
+                            for (int i = 0; i < products.size(); i++) {
+                                if (products.get(i).getStock() == 0)
+                                    System.err.println("\n" + products.get(i));
+                                }
                             break;
-                        }
-                        case 4: {
-                            System.out.println("selection 4");
-                            break;
-                        }
 
                         case 0: {
                             System.out.println("Exit");
@@ -164,37 +165,28 @@ public class Shop {
 // MAin for Running Menu
     public static void main(String[] args) {
 
- Shop shop = new Shop();
- shop.PrintHeader();
- shop.PrintMenu();
- shop.UserInput();
+        Shop shop = new Shop("Louis Vuition", "Karlsplatz");
+        Product product1 = new Product("Puma T-shirt", "100% cotton,Farbe White", 20, ProductCategory.TSHIRT,6);
+        Product product2 = new Product("addidas T-shirt", "100% cotton,Farbe Black", 35, ProductCategory.TSHIRT,5);
+        Product product3 = new Product("Only T-shirt", "100% cotton,Farbe Grey", 25, ProductCategory.TSHIRT,0);
+        Product product4 = new Product("Puma Jacket", "Farbe White", 65, ProductCategory.JACKET,0);
+        Product product5 = new Product("Only Jacket", "Farbe Black", 75, ProductCategory.JACKET,3);
+
+        shop.addShopProduct(product1);
+        shop.addShopProduct(product2);
+        shop.addShopProduct(product3);
+        shop.addShopProduct(product4);
+        shop.addShopProduct(product5);
+
+        shop.PrintHeader();
+        shop.PrintMenu();
+        shop.UserInput();
+
  }
 
 
 
     //get userPurchased Report in the file
-
-    public User getReport(User user) throws IOException {
-        try {
-            File File = new File("User.txt");
-            if (File.createNewFile()) {
-                System.out.println("File has been created");
-            }
-            else {
-                System.out.println("File is already exists");
-            }
-            FileWriter fileWriter = new FileWriter(File);
-            fileWriter.write(String.valueOf(user));
-            System.lineSeparator();
-            fileWriter.close();
-        }
-        catch (Exception e){
-            System.out.println(e);
-        }
-        return user;
-    }
-
-
 
 
 
@@ -208,5 +200,6 @@ public class Shop {
                 ", User=" + User +
                 '}';
     }
+}
 
-    }
+

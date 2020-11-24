@@ -12,12 +12,12 @@ public class User {
     private String address;
     private int zip;
     private int phone;
-    int Counter = 0;
+    static int Counter = 1;
     private ArrayList<Product> userPurchaseditems;
+    ArrayList<Shop> shop;
 
     public  User(String firstname,String lastname,String eMail,String address,int zip,int phone){
-        Counter++;
-        this.UserID = Counter;
+        this.UserID = Counter++;
         this.firstname = firstname;
         this.lastname=lastname;
         this.eMail = eMail;
@@ -94,7 +94,50 @@ public class User {
         this.userPurchaseditems.add(product);
 
     }
+    public  void purchaseFromShop(Product product, Shop shop) {
+        for(int i = 0; i< shop.getProducts().size();i++)
+        if(shop.getProducts().get(i).getProductName().equals(product.getProductName())){
+          int oldStock = shop.getProducts().get(i).getStock();
+              if(oldStock==0){
+              System.err.println("Sorry! Product is not available");
+          }
+          else {
 
+              System.out.println("USer" +getFirstname() +" has purchased product " +product.getProductName() +" from " +shop.getShopName());
+              oldStock=oldStock-1;
+              shop.getProducts().get(i).setStock(oldStock);
+              shop.UserHistory(this);
+              System.out.println("Product's Stock After the Purchase " +shop.getProducts().get(i).getStock());
+              this.userPurchaseditems.add(product);
+              System.out.println("Stock gets reduced by the amount "+userPurchaseditems.size());
+              System.out.println("Purchased History of the User After Purchase \n" +userPurchaseditems);
+          }
+        }
+
+    }
+    public void getReport(Shop shop) throws IOException {
+        try {
+            File File = new File("User.txt");
+            if (File.createNewFile()) {
+                System.out.println("File has been created");
+            }
+            else {
+                System.out.println("File is already exists");
+            }
+            FileWriter fileWriter = new FileWriter(File);
+            fileWriter.write(String.valueOf(userPurchaseditems) +System.lineSeparator());
+            fileWriter.close();
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+
+    }
+
+
+    public ArrayList<Shop> getShop() {
+        return shop;
+    }
 
     @Override
     public String toString() {

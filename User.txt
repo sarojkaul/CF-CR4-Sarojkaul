@@ -1,1 +1,1 @@
-User{firstname='saroj', lastname='kaul', eMail='saroj@gmail.com', address='vienna', zip=1200, phone=690234555, Counter=1, userPurchaseditems=[Product{productID=1, productName='Puma T-shirt', ProductDescription='100% cotton,Farbe White', productPrice=20.0, productcategory=TSHIRT, Stock=9, counter=1}]}
+[Product{productID=1, productName='Puma T-shirt', ProductDescription='100% cotton,Farbe White', productPrice=20.0, productcategory=TSHIRT, Stock=5, counter=8}]

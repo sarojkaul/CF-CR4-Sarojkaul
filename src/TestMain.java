@@ -4,13 +4,13 @@ import java.util.Scanner;
 public class TestMain
 {
     public static void main(String[] args) {
-        Product product1 = new Product("Puma T-shirt", "100% cotton,Farbe White", 20, ProductCategory.TSHIRT);
-        Product product2 = new Product("addidas T-shirt", "100% cotton,Farbe Black", 35, ProductCategory.TSHIRT);
-        Product product3 = new Product("Only T-shirt", "100% cotton,Farbe Grey", 25, ProductCategory.TSHIRT);
-        Product product4 = new Product("Puma Jacket", "Farbe White", 65, ProductCategory.JACKET);
-        Product product5 = new Product("Only Jacket", "Farbe Black", 75, ProductCategory.JACKET);
-        Product product6 = new Product("addidas Jacket", "Farbe Grey", 100, ProductCategory.JACKET);
-        Product product7 = new Product("Puma Trouser", "100% cotton,Farbe Black", 50, ProductCategory.TROUSER);
+        Product product1 = new Product("Puma T-shirt", "100% cotton,Farbe White", 20, ProductCategory.TSHIRT,6);
+        Product product2 = new Product("addidas T-shirt", "100% cotton,Farbe Black", 35, ProductCategory.TSHIRT,5);
+        Product product3 = new Product("Only T-shirt", "100% cotton,Farbe Grey", 25, ProductCategory.TSHIRT,0);
+        Product product4 = new Product("Puma Jacket", "Farbe White", 65, ProductCategory.JACKET,4);
+        Product product5 = new Product("Only Jacket", "Farbe Black", 75, ProductCategory.JACKET,3);
+        Product product6 = new Product("addidas Jacket", "Farbe Grey", 100, ProductCategory.JACKET,10);
+        Product product7 = new Product("Puma Trouser", "100% cotton,Farbe Black", 50, ProductCategory.TROUSER,4);
 
         HashMap<Integer, Product> products = new HashMap<>();
         products.put(product1.getProductID(), product1);
@@ -49,9 +49,15 @@ public class TestMain
         users.put(User.getUserID(), user3);
         users.put(User.getUserID(), user4);
 
-        Shop.purchase(product1, shop1, user1);
+        user2.purchaseFromShop(product1,shop1);
+
+        //Work on Tomorrow why cannot add more products
+
+        user3.purchaseFromShop(product3,shop1);//User Try to Purchase Product from Out of stock
+
+
         try {
-            shop1.getReport(user1);
+            user2.getReport(shop1);
         }
         catch (Exception e)
         {
@@ -59,9 +65,7 @@ public class TestMain
         }
 
 
-
-
-        //Display menu
+        
 
 
     }
