@@ -96,26 +96,27 @@ public class User {
     }
     public  void purchaseFromShop(Product product, Shop shop) {
         for(int i = 0; i< shop.getProducts().size();i++)
-        if(shop.getProducts().get(i).getProductName().equals(product.getProductName())){
+        if(shop.getProducts().get(i).getProductName().equals(product.getProductName())&& shop.getProducts().get(i).getProductPrice() == product.getProductPrice()){
           int oldStock = shop.getProducts().get(i).getStock();
               if(oldStock==0){
               System.err.println("Sorry! Product is not available");
           }
-          else {
+          else  {
 
               System.out.println("USer" +getFirstname() +" has purchased product " +product.getProductName() +" from " +shop.getShopName());
               oldStock=oldStock-1;
               shop.getProducts().get(i).setStock(oldStock);
-              shop.UserHistory(this);
-              System.out.println("Product's Stock After the Purchase " +shop.getProducts().get(i).getStock());
-              this.userPurchaseditems.add(product);
-              System.out.println("Stock gets reduced by the amount "+userPurchaseditems.size());
+              //shop.UserHistory(this);
+              userPurchaseditems.add(product);
+              System.out.println("Product's Stock After the Purchase");
+              System.out.println("Stock gets reduced by the amount " +oldStock);
+
               System.out.println("Purchased History of the User After Purchase \n" +userPurchaseditems);
           }
         }
 
     }
-    public void getReport(Shop shop) throws IOException {
+    public void getReport(User userPurchaseditems) throws IOException {
         try {
             File File = new File("User.txt");
             if (File.createNewFile()) {
@@ -125,7 +126,8 @@ public class User {
                 System.out.println("File is already exists");
             }
             FileWriter fileWriter = new FileWriter(File);
-            fileWriter.write(String.valueOf(userPurchaseditems) +System.lineSeparator());
+            fileWriter.write("Sorry donot know the way to formating the file its shows all data in one line \n But its shows purschased history after the Display user detail" +System.lineSeparator());
+            fileWriter.write(String.valueOf("Purchase History of Users \n " +userPurchaseditems.firstname + " has Purchased Foloowing items \n " +userPurchaseditems));
             fileWriter.close();
         }
         catch (Exception e){

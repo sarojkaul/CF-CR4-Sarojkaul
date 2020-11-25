@@ -1,1 +1,5 @@
-[Product{productID=1, productName='Puma T-shirt', ProductDescription='100% cotton,Farbe White', productPrice=20.0, productcategory=TSHIRT, Stock=5, counter=8}]
+Sorry donot know the way to formating the file its shows all data in one line 
+ But its shows purschased history after the Display user detail
+Purchase History of Users 
+ Joe has Purchased Foloowing items 
+ User{firstname='Joe', lastname='Müller', eMail='joe@gmail.com', address='vienna', zip=1230, phone=790234555, Counter=5, userPurchaseditems=[Product{productID=1, productName='Puma T-shirt', ProductDescription='100% cotton,Farbe White', productPrice=20.0, productcategory=TSHIRT, Stock=5, counter=8}]}

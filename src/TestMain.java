@@ -3,9 +3,9 @@ import java.util.Scanner;
 
 public class TestMain
 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws StockLimitReachedException {
         Product product1 = new Product("Puma T-shirt", "100% cotton,Farbe White", 20, ProductCategory.TSHIRT,6);
-        Product product2 = new Product("addidas T-shirt", "100% cotton,Farbe Black", 35, ProductCategory.TSHIRT,5);
+        Product product2 = new Product("addidas T-shirt", "100% cotton,Farbe Black", 35, ProductCategory.TSHIRT,7);
         Product product3 = new Product("Only T-shirt", "100% cotton,Farbe Grey", 25, ProductCategory.TSHIRT,0);
         Product product4 = new Product("Puma Jacket", "Farbe White", 65, ProductCategory.JACKET,4);
         Product product5 = new Product("Only Jacket", "Farbe Black", 75, ProductCategory.JACKET,3);
@@ -38,7 +38,7 @@ public class TestMain
 
          // Users
 
-        User user1 = new User("saroj", "kaul", "saroj@gmail.com", "vienna", 1200, 690234555);
+        User user1 = new User("Kaul", "kaul", "saroj@gmail.com", "vienna", 1200, 690234555);
         User user2 = new User("Maria", "Müller", "Maria@gmail.com", "vienna", 1210, 640234555);
         User user3 = new User("Stephen", "John", "stephen@gmail.com", "vienna", 1220, 590234555);
         User user4 = new User("Joe", "Müller", "joe@gmail.com", "vienna", 1230, 790234555);
@@ -49,15 +49,20 @@ public class TestMain
         users.put(User.getUserID(), user3);
         users.put(User.getUserID(), user4);
 
-        user2.purchaseFromShop(product1,shop1);
 
-        //Work on Tomorrow why cannot add more products
-
+        user1.purchaseFromShop(product4,shop3);
+        user1.purchaseFromShop(product5,shop2);
+        user3.purchaseFromShop(product4,shop1);
+        user4.purchaseFromShop(product1,shop1);
         user3.purchaseFromShop(product3,shop1);//User Try to Purchase Product from Out of stock
 
 
+
+
+
+
         try {
-            user2.getReport(shop1);
+            user2.getReport(user4);
         }
         catch (Exception e)
         {
@@ -65,8 +70,11 @@ public class TestMain
         }
 
 
-        
+        shop2.CheckStock(product4); //Check the Stock is its Less than 5 its inform to the staff
 
+        shop1.increaseStock(product1.getProductID(), 20); //Stock Limit Exception
 
     }
+
+
 }

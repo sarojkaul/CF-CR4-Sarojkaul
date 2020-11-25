@@ -85,6 +85,48 @@ public class Shop {
         products.remove(product);
 
     }
+//Method to increase stock
+    public void increaseStock(int productID,int Numberofproducts) throws StockLimitReachedException  {
+        int oldStock;
+        for (Product item : products)
+        {
+          if(item.getProductID()==productID){
+              oldStock = item.getStock();
+              if (oldStock > 15){
+                  item.setStock((oldStock)+Numberofproducts);
+                  System.out.println("Stock is changed ");
+                  System.out.println("Product " +item.getProductID() +"  "+item.getProductName() +" " +" stock " +item.getStock());
+              }
+              else {
+                  System.err.println("this product cannot be added");
+                 throw new StockLimitReachedException();
+              }
+     
+  }
+        }
+
+    }
+
+    //Check Limitation of Stock
+    public void CheckStock(Product product) {
+        int old_Stock;
+        for(Product item: products) {
+            old_Stock = item.getStock();
+            if (old_Stock <= 5) {
+                System.out.println("\"Attention! shop has less than 5 items in Stock");
+
+            }
+        }
+
+    }
+
+    public void addItemstoStock(int productID,int Numberofproducts) {
+        try{
+            this.increaseStock(productID,Numberofproducts);
+        }catch (StockLimitReachedException e){
+            System.out.println(e.getMessage());
+        }
+    }
 
     public void PrintHeader() {
         System.out.println("+-------------------------+");
